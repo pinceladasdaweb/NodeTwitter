@@ -1,0 +1,33 @@
+{
+    "name": "nodetwitter",
+    "description": "Display your latest tweets with Node.js",
+    "main": "app.js",
+    "version": "0.0.1",
+    "private": true,
+    "author": "Pedro Rogério",
+    "homepage": "",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon app.js"
+    },
+    "dependencies": {
+        "express": "~4.8.8",
+        "ejs": "~1.0.0",
+        "twit": "^1.1.18"
+    },
+    "devDependencies": {
+        "nodemon": "*"
+    },
+    "keywords": [
+        "twitter",
+        "api"
+    ],
+    "repository": "https://github.com/pinceladasdaweb/NodeTwitter",
+    "bugs": {
+        "url": "https://github.com/pinceladasdaweb/NodeTwitter/issues"
+    },
+    "licenses": [{
+        "type": "MIT",
+        "url": "http://opensource.org/licenses/MIT"
+    }]
+}

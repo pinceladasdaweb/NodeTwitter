@@ -1,0 +1,139 @@
+/**
+* @section Reset styles
+* These styles reset the default style sheet that comes with the user agent.
+*/
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, fieldset, blockquote, pre, textarea {
+    margin: 0
+}
+
+ul, ol, td, th, fieldset, legend {
+    padding: 0
+}
+
+fieldset {
+    border: none
+}
+
+a {
+    color: #f05d94;
+    text-decoration: none
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    border: none;
+    height: auto;
+    max-width: 100%;
+    width: auto;
+}
+
+/**
+* Clearfix
+*/
+.cf:before, .cf:after {
+    content: " ";
+    display: table
+}
+
+.cf:after {clear: both}
+
+/**
+* Image Replacement
+*/
+.hide-text {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden
+}
+
+/**
+* @section HTML5 Elements
+* Set display:block for HTML5 block elements
+*/
+main, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block}
+
+/**
+* @section General
+* Custom design for this app here
+*/
+body {
+    background: #e3e3e3 url('/images/background.png') no-repeat center top;
+    color: #a8a8a8;
+    font: 62.5% 'Kreon', serif;
+}
+
+/**
+* @section Stream
+* Custom design for this stream here
+*/
+.loading {
+    display: block;
+    margin: 0 auto
+}
+
+h1 {
+    color: #545454;
+    font-size: 2.9em;
+    margin: 50px auto 0;
+    text-align: center;
+    width: 380px;
+}
+
+#stream {
+    margin: 30px auto;
+    width: 320px
+}
+
+.item {
+    background: url('/images/bg-tweets.png') no-repeat;
+    height: 156px;
+    margin-bottom: 15px;
+    padding: 40px 30px 0;
+    position: relative;
+}
+
+.item img {
+    border-radius: 5px;
+    box-shadow: 0px 0px 7px rgba(38, 38, 38, 0.45);
+    float: left;
+    height: 48px;
+    margin: 10px 12px 0 0;
+    moz-box-shadow: 0px 0px 7px rgba(38, 38, 38, 0.45);
+    webkit-box-shadow: 0px 0px 7px rgba(38, 38, 38, 0.45);
+    width: 48px;
+}
+
+.item p {
+    color: #a8a8a8;
+    font: italic 1.4em Georgia,"Times New Roman", Times, serif;
+    height: 90px;
+    margin-bottom: 5px;
+    position: relative;
+    text-shadow: 1px 0px 0px #fff;
+}
+
+.item p + p {
+    color: #c0c0c0;
+    font-size: 1.2em;
+    height: auto;
+}
+
+.item p + p:before {
+    background: url('/images/ico-twitter.png') no-repeat;
+    content: "";
+    height: 15px;
+    position: absolute;
+    right: 0;
+    width: 21px;
+}
+
+.item cite {
+    bottom: 0;
+    color: #f05d94;
+    font: italic 1.2em Georgia,"Times New Roman", Times, serif;
+    left: 60px;
+    position: absolute;
+}
