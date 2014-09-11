@@ -9,7 +9,7 @@ Access [the url](http://nodejs-twitter.herokuapp.com/) and view in action.
 ## How to use?
 NodeTwitter is a [Vanilla JS](http://vanilla-js.com/) plugin with no dependancies. It is a very simple example of how to get your latest updates on Twitter with Node.js and show the customer with pure JavaScript.
 
-1 - Open the file [`views/index.ejs`](index.ejs), at the end of the same look for the code block below and fill in your details:
+1 - Open the file [`views/index.ejs`](views/index.ejs), at the end of the same look for the code block below and fill in your details:
 
 ```javascript
 (function(window, document, undefined) {
