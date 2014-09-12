@@ -78,8 +78,9 @@ h1 {
     color: #545454;
     font-size: 2.9em;
     margin: 50px auto 0;
+    padding: 0 10px;
     text-align: center;
-    width: 380px;
+    max-width: 300px;
 }
 
 #stream {
