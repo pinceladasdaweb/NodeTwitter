@@ -34,7 +34,7 @@ module.exports = {
 ```
 
 ## Browser support
-IE9+ and modern browsers.
+IE8+ and modern browsers.
 
 ## License
 NodeTwitter is licensed under the MIT License.
