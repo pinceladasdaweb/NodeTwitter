@@ -11,7 +11,7 @@
         "start": "nodemon app.js"
     },
     "dependencies": {
-        "express": "~4.8.8",
+        "express": "~4.9.3",
         "ejs": "~1.0.0",
         "twit": "^1.1.18"
     },
