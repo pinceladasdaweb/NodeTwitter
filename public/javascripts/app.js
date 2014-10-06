@@ -5,7 +5,15 @@ var Browser = (function () {
     };
 }());
 
-(function (window, document, undefined) {
+(function (name, context, definition) {
+    if (typeof define === 'function' && define.amd) {
+        define(definition);
+    } else if (typeof module !== 'undefined' && module.exports) {
+        module.exports = definition();
+    } else {
+        context[name] = definition();
+    }
+})('NodeTwitter', this, function () {
     "use strict";
 
     var NodeTwitter = function (options) {
@@ -122,5 +130,5 @@ var Browser = (function () {
         }
     };
 
-    window.NodeTwitter = NodeTwitter;
-}(window, document));
+    return NodeTwitter;
+});
