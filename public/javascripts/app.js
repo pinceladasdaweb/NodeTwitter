@@ -1,10 +1,3 @@
-var Browser = (function () {
-    var agent = navigator.userAgent;
-    return {
-        ie: agent.match(/MSIE\s([^;]*)/)
-    };
-}());
-
 (function (name, context, definition) {
     if (typeof define === 'function' && define.amd) {
         define(definition);
@@ -72,52 +65,52 @@ var Browser = (function () {
                     screenname = self.username,
                     profile    = tweet.user.profile_image_url_https;
 
-                content += '<div class="item clerfix"><img alt="' + screenname + '" src="' + profile + '"><p>' + self.twitterLinks(text) + '</p><p>' + self.prettyDate(created) + '</p><cite>@' + screenname + '</cite></div>';
+                content += '<div class="item clerfix"><img alt="' + screenname + '" src="' + profile + '"><p>' + self.twitterLinks(text) + '</p><p>' + created + '</p><cite>@' + screenname + '</cite></div>';
             });
 
             timeline.innerHTML = content;
         },
-        prettyDate: function (a) {
-            var b = new Date(),
-                c = new Date(a);
+        prettyDate: function (dateString) {
+            var rightNow = new Date(),
+                then     = new Date(dateString);
 
-            if (Browser.ie) {
-                c = Date.parse(a.replace(/( \+)/, ' UTC$1'));
+            if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
+                then = Date.parse(dateString.replace(/( \+)/, ' UTC$1'));
             }
 
-            var d = b - c,
-                e = 1000,
-                minute = e * 60,
-                hour = minute * 60,
-                day = hour * 24,
-                week = day * 7;
+            var diff   = rightNow - then,
+                second = 1000,
+                minute = second * 60,
+                hour   = minute * 60,
+                day    = hour * 24,
+                week   = day * 7;
 
-            if (isNaN(d) || d < 0) {
+            if (isNaN(diff) || diff < 0) {
                 return "";
             }
-            if (d < e * 7) {
-                return "just now";
+            if (diff < second * 2) {
+                return "just now"
             }
-            if (d < minute) {
-                return Math.floor(d / e) + " seconds ago";
+            if (diff < minute) {
+                return Math.floor(diff / second) + " seconds ago";
             }
-            if (d < minute * 2) {
-                return "1 minute ago";
+            if (diff < minute * 2) {
+                return "1 minute ago"
             }
-            if (d < hour) {
-                return Math.floor(d / minute) + " minutes ago";
+            if (diff < hour) {
+                return Math.floor(diff / minute) + " minutes ago";
             }
-            if (d < hour * 2) {
+            if (diff < hour * 2) {
                 return "1 hour ago";
             }
-            if (d < day) {
-                return Math.floor(d / hour) + " hours ago";
+            if (diff < day) {
+                return Math.floor(diff / hour) + " hours ago";
             }
-            if (d > day && d < day * 2) {
+            if (diff > day && diff < day * 2) {
                 return "yesterday";
             }
-            if (d < day * 365) {
-                return Math.floor(d / day) + " days ago";
+            if (diff < day * 365) {
+                return Math.floor(diff / day) + " days ago";
             } else {
                 return "over a year ago";
             }
