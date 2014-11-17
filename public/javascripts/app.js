@@ -40,12 +40,17 @@
 
             xhttp.open('GET', path, true);
             xhttp.onreadystatechange = function () {
-                if (xhttp.status === 200 && xhttp.readyState === 4) {
-                    var json = JSON.parse(xhttp.responseText);
-                    callback.call(self, json);
+                if (this.readyState === 4) {
+                    if (this.status >= 200 && this.status < 400) {
+                        var json = JSON.parse(this.responseText);
+                        callback.call(self, json);
+                    } else {
+                        throw new Error(this.status+" - "+this.statusText);
+                    }
                 }
             };
             xhttp.send();
+            xhttp = null;
         },
         loop: function (els, callback) {
             var i = 0, max = els.length;
