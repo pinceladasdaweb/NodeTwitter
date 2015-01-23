@@ -2,7 +2,7 @@
     "name": "nodetwitter",
     "description": "Display your latest tweets with Node.js",
     "main": "app.js",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "private": true,
     "author": "Pedro Rogério",
     "homepage": "",
@@ -11,9 +11,9 @@
         "start": "nodemon app.js"
     },
     "dependencies": {
-        "express": "~4.10.6",
-        "ejs": "~1.0.0",
-        "twit": "^1.1.18"
+        "express": "~4.11.1",
+        "ejs": "~2.2.2",
+        "twit": "^1.1.19"
     },
     "devDependencies": {
         "nodemon": "*"
