@@ -1,3 +1,5 @@
+/*jslint browser: true*/
+/*global define, module, exports*/
 (function (name, context, definition) {
     if (typeof define === 'function' && define.amd) {
         define(definition);
@@ -8,6 +10,15 @@
     }
 })('NodeTwitter', this, function () {
     "use strict";
+
+    if (!(Function.prototype.hasOwnProperty('bind'))) {
+        Function.prototype.bind = function () {
+            var fn = this, context = arguments[0], args = Array.prototype.slice.call(arguments, 1);
+            return function () {
+                return fn.apply(context, args.concat(Array.prototype.slice.call(arguments)));
+            };
+        };
+    }
 
     var NodeTwitter = function (options) {
         if (!this || !(this instanceof NodeTwitter)) {
@@ -21,7 +32,7 @@
         this.username  = options.username;
         this.container = options.container;
         this.counter   = options.counter || 10;
-        this.endpoint  = '/tweets?user=' + this.username + '&counter=' + this.counter + '';
+        this.endpoint  = '/tweets?user=' + this.username + '&counter=' + this.counter;
 
         this.fetch();
     };
@@ -32,20 +43,19 @@
 
     NodeTwitter.prototype = {
         fetch: function () {
-            this.getJSON(this.endpoint, this.loadTweets);
+            this.getJSON(this.endpoint, this.loadTweets, this);
         },
-        getJSON: function (path, callback) {
-            var xhttp = new XMLHttpRequest(),
-                self  = this;
+        getJSON: function (path, callback, context) {
+            var xhttp = new XMLHttpRequest();
 
             xhttp.open('GET', path, true);
             xhttp.onreadystatechange = function () {
                 if (this.readyState === 4) {
                     if (this.status >= 200 && this.status < 400) {
                         var json = JSON.parse(this.responseText);
-                        callback.call(self, json);
+                        callback.call((context || window), json);
                     } else {
-                        throw new Error(this.status+" - "+this.statusText);
+                        throw new Error(this.status + " - " + this.statusText);
                     }
                 }
             };
@@ -60,18 +70,17 @@
             }
         },
         loadTweets: function (tweets) {
-            var self     = this,
-                timeline = document.querySelector(this.container),
+            var timeline = document.querySelector(this.container),
                 content  = '';
 
             this.loop(tweets, function (tweet) {
                 var text       = tweet.text,
-                    created    = self.prettyDate(tweet.created_at),
-                    screenname = self.username,
+                    created    = this.prettyDate(tweet.created_at),
+                    screenname = this.username,
                     profile    = tweet.user.profile_image_url_https;
 
-                content += '<div class="item clerfix"><img alt="' + screenname + '" src="' + profile + '"><p>' + self.twitterLinks(text) + '</p><p>' + created + '</p><cite>@' + screenname + '</cite></div>';
-            });
+                content += '<div class="item clerfix"><img alt="' + screenname + '" src="' + profile + '"><p>' + this.twitterLinks(text) + '</p><p>' + created + '</p><cite>@' + screenname + '</cite></div>';
+            }.bind(this));
 
             timeline.innerHTML = content;
         },
@@ -94,13 +103,13 @@
                 return "";
             }
             if (diff < second * 2) {
-                return "just now"
+                return "just now";
             }
             if (diff < minute) {
                 return Math.floor(diff / second) + " seconds ago";
             }
             if (diff < minute * 2) {
-                return "1 minute ago"
+                return "1 minute ago";
             }
             if (diff < hour) {
                 return Math.floor(diff / minute) + " minutes ago";
@@ -116,9 +125,9 @@
             }
             if (diff < day * 365) {
                 return Math.floor(diff / day) + " days ago";
-            } else {
-                return "over a year ago";
             }
+
+            return "over a year ago";
         },
         twitterLinks: function (text) {
             text = text.replace(/(https?:\/\/)([\w\-:;?&=+.%#\/]+)/gi, '<a href="$1$2">$2</a>')
