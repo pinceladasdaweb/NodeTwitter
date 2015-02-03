@@ -2,17 +2,17 @@
     "name": "nodetwitter",
     "description": "Display your latest tweets with Node.js",
     "main": "app.js",
-    "version": "0.0.8",
+    "version": "0.1.0",
     "private": true,
     "author": "Pedro Rogério",
-    "homepage": "",
+    "homepage": "http://nodejs-twitter.herokuapp.com/",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "nodemon app.js"
     },
     "dependencies": {
-        "express": "~4.11.1",
-        "ejs": "~2.2.2",
+        "express": "~4.11.2",
+        "ejs": "~2.2.4",
         "twit": "^1.1.19"
     },
     "devDependencies": {
