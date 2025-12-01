@@ -12,7 +12,7 @@
     },
     "dependencies": {
         "ejs": "^3.1.10",
-        "express": "^5.1.0",
+        "express": "^5.2.0",
         "twit": "^2.2.11"
     },
     "devDependencies": {
